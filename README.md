@@ -43,11 +43,9 @@ you would get an error.
 
 Migrations, as it was mentioned before, inherit from `ActiveRecord::Migration`
 and usually have a method called `change`. In change, you can create a table
-with the [create_table][] method. This method automatically will create a
+with the [create_table][create_table] method. This method automatically will create a
 primary key column called `id`, but this default can be overridden if you'd like
 to customize it.
-
-[create_table]: http://guides.rubyonrails.org/migrations.html#creating-a-table
 
 Here's a simple example of the `create_table` method in action:
 
@@ -145,7 +143,7 @@ class Candy < ActiveRecord::Base
 end
 ```
 
-After saving the code above, running `rake db:migrate` will apply the desired
+After saving the code above, running bin/rake db:migrate` will apply the desired
 changes to the database by running the change method. Then you can alter the
 database with simple Ruby statements.
 
@@ -266,7 +264,7 @@ three files in the `db/migrate` folder.
 down.** Your models should be no longer than two lines of code. Most of your
 work will be done in the migrations.
 
-You can use `rake db:create_migration` to create the files for the migrations.
+You can use `bin/rake db:create_migration` to create the files for the migrations.
 
 - The first step is to run `bundle install`.
 - Create the `Costume` class in `app/models/costume.rb`.
@@ -283,8 +281,8 @@ When running your migrations and rollbacks, use `RACK_ENV=test` in order to run
 the migrations for the test environment:
 
 ```console
-$ bundle exec rake db:migrate RACK_ENV=test
-$ bundle exec rake db:rollback RACK_ENV=test
+bin/rake db:migrate RACK_ENV=test
+bin/rake db:rollback RACK_ENV=test
 ```
 
 You can also run the migrations without `RACK_ENV=test`, which will migrate the
@@ -292,22 +290,22 @@ development database. This is helpful if you want to explore the code from the
 console:
 
 ```console
-$ bundle exec rake db:migrate
-$ bundle exec rake console
+bin/rake db:migrate
+bin/rake console
 ```
 
-Just like for any other lab, run `learn test` to view your test progress.
+Just like for any other lab, run `bin/rspec` to view your test progress.
 However, unlike some of the other labs in this section, for this lab, when
 updating an existing migration, **you will need to rollback your previous
 migrations for that table using the Rake command
-`rake db:rollback RACK_ENV=test`**. Otherwise, the schema will remain unchanged
+bin/rake db:rollback RACK_ENV=test`**. Otherwise, the schema will remain unchanged
 and the changes you make to your migrations will not be seen.
 
-For example, say you've run `rake db:migrate RACK_ENV=test` and `learn test`
+For example, say you've run `bin/rake db:migrate RACK_ENV=test` and `bin/rspec`
 once to start, and see that you need to add an attribute to the `costume_stores`
 table. Since this table is the second migration of three, you will need to run
-`rake db:rollback RACK_ENV=test` twice to remove the previous migration for this
-table, then run `rake db:migrate RACK_ENV=test` again to update the schema. Your
+`bin/rake db:rollback RACK_ENV=test` twice to remove the previous migration for this
+table, then run `bin/rake db:migrate RACK_ENV=test` again to update the schema. Your
 code, however, may break if the other migration files are empty.
 
 ## Resources
@@ -317,4 +315,5 @@ code, however, may break if the other migration files are empty.
 - [Creating Active Record Models](https://guides.rubyonrails.org/active_record_basics.html#creating-active-record-models)
 - [Timestamps][timestamps]
 
+[create_table]: http://guides.rubyonrails.org/migrations.html#creating-a-table
 [timestamps]: https://api.rubyonrails.org/classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-timestamps
